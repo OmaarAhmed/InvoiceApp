@@ -1,0 +1,89 @@
+<div class="text-center" style="font-size: 140%;">Create New Invoice</div>
+<hr>
+<form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+    <input type="hidden" name="InvoiceID" #InvoiceID="ngModel" [(ngModel)]="datasource.InvoiceID">
+    <!-- <div class="form-group">
+      <label>Invoice ID</label>
+      <input name="InvoiceID" #FullName="ngModel" [(ngModel)]="service.formData.InvoiceID" class="form-control" required>
+      <div class="validation-error" *ngIf="FullName.invalid && FullName.touched">This field is required.</div>
+    </div> -->
+    <div class="form-group">
+      <label>Client Name</label>
+      <input name="CustomerName" #Position="ngModel" [(ngModel)]="datasource.Customer.CustomerName" class="form-control">
+<!-- 
+      <label>Birth Date</label>
+      <input name="BirthDate" #Position="ngModel" [(ngModel)]="datasource.Customer.BirthDate" class="form-control"> -->
+    </div>
+
+    <div class="form-row">
+
+      <div class="form-group  col-md-6">
+        <label>Birth Date</label>
+        <input name="BirthDate" #Position="ngModel" [(ngModel)]="datasource.Customer.BirthDate" class="form-control">
+      </div>
+
+      <div class="form-group col-md-6">
+        <label>Phone Number</label>
+        <input name="Phone" #Position="ngModel" [(ngModel)]="datasource.Customer.Phone" class="form-control">
+      </div>
+
+    </div>
+     
+
+    <div class="form-group" > <!--*ngIf="!isCollapsed"-->
+       
+
+      <ag-grid-angular
+        #agGrid
+        style="width: 450px; height: 90px;"
+        id="myGrid"
+        class="ag-theme-balham"
+        [columnDefs]="columnDefs"
+        [defaultColDef]="defaultColDef"
+        [singleClickEdit]="true"
+        [(rowData)]="rowData"
+        (gridReady)="onGridReady($event)"
+        (cellValueChanged)="MycellValueChanged()"
+      ></ag-grid-angular>
+      
+
+    </div>
+
+    <button type="button" (click)="onAddRow()" class="btn btn-info">Add Item</button> &nbsp;
+    <button type="button" (click)="onItemAdd()" [disabled]="Myflag" class="btn btn-info">Update Database</button>
+    <hr>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Due Date</label>
+        <input name="DueDate" #EMPCode="ngModel" [(ngModel)]="datasource.DueDate" class="form-control">
+      </div>
+      <div class="form-group  col-md-6">
+        <label>Cost Amount</label>
+        <input name="Price" #Mobile="ngModel" [disabled]="true" [(ngModel)]="Cost" class="form-control"> <!--[(ngModel)]="datasource.Price"-->
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block">SUBMIT</button>
+    </div>
+  </form> 
+
+
+
+
+  <!-- <table class="table table-hover">
+    <tr>
+        <td>ItemID</td>
+        <td>InvoiceID</td>
+        <td>ProductID</td>
+        <td>Quantity</td>
+        <td>Delete</td>
+    </tr>
+    <tr *ngFor="let Inv of itemList">
+      <td>{{Inv.ItemID}}</td>
+      <td>{{Inv.InvoiceID}}</td>
+      <td>{{Inv.ProductID}}</td>
+      <td>{{Inv.Quantity}}</td>
+      <td><button (click)="onDelete(Inv.InvoiceID)" class="btn btn-sm btn-danger">X</button></td>
+    </tr>
+  </table> -->
